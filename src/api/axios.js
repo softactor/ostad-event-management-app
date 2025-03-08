@@ -5,7 +5,7 @@ const apiUrl = "http://localhost:8095/api/"
 
 // Create an Axios instance with the base URL from .env
 const api = axios.create({
-  baseURL: "http://localhost:8095/api/",
+  baseURL: apiUrl,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -13,7 +13,7 @@ const api = axios.create({
 
 // Add request interceptor (for authentication token if needed)
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('apiToken');
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }

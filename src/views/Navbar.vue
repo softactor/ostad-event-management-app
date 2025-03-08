@@ -14,8 +14,17 @@
 
             <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
                 <router-link class="me-3 py-2 link-body-emphasis text-decoration-none" to="/">Home</router-link>
-                <router-link class="me-3 py-2 link-body-emphasis text-decoration-none" to="/login">Login</router-link>
-                <router-link class="me-3 py-2 link-body-emphasis text-decoration-none" to="/registration">registration</router-link>
+
+                <template v-if="!userLoggedIn">
+                    <router-link class="me-3 py-2 link-body-emphasis text-decoration-none" to="/login">Login</router-link>
+                    <router-link class="me-3 py-2 link-body-emphasis text-decoration-none" to="/registration">registration</router-link>
+                </template>
+                
+                <template v-else>
+                    <router-link class="me-3 py-2 link-body-emphasis text-decoration-none" to="/login">Memberdashboard</router-link>
+                    <button class="me-3 py-2 link-body-emphasis text-decoration-none btn btn-danger" @click="logout">Logout</button>
+                </template>
+                
             </nav>
         </div>
 
@@ -30,5 +39,22 @@
 </template>
 
 <script setup>
-import router from '@/routes';
+import { useRouter } from 'vue-router';
+import { computed } from 'vue';
+
+const router = useRouter();
+
+
+const userLoggedIn = computed(() => {
+    return localStorage.getItem('apiToken') ? true : false;
+})   
+
+const logout = () => {
+    localStorage.removeItem('apiToken');
+    localStorage.removeItem('user');
+    router.push('/login').then(() => {
+        return window.location.reload();
+    })
+}
+
 </script>

@@ -4,11 +4,12 @@
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Email address</label>
     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" v-model="email">
-    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+    <div v-if="errors.email" class="text-danger">{{ errors.email[0] }}</div>
   </div>
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Password</label>
     <input type="password" class="form-control" id="exampleInputPassword1" v-model="password">
+    <div v-if="errors.password" class="text-danger">{{ errors.password[0] }}</div>
   </div>
   <div class="mb-3 form-check">
     <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -23,10 +24,13 @@
 
 import { ref } from 'vue';
 import api from '@/api/axios';
+import { useToast } from 'vue-toast-notification';
 
 
 const email = ref('');
 const password = ref(''); 
+const toast = useToast();
+const errors = ref({});
 
 const memberLogin = async () => {
   try{
@@ -36,11 +40,14 @@ const memberLogin = async () => {
     });
     if(response.status){
       localStorage.setItem('apiToken', response.data.token);
-      localStorage.setItem('user', response.data.data);
-      window.location.href = '/';
+      localStorage.setItem('user', JSON.stringify(response.data.data));
+      window.location.href = '/member-dashboard';
     }
   }catch(error){
-    console.log(error);
+    toast.error('validation error', {
+      position: 'top-right'
+    })
+    errors.value = error.response.data.errors
   }
 }
 

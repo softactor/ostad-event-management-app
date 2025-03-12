@@ -25,12 +25,14 @@
 import { ref } from 'vue';
 import api from '@/api/axios';
 import { useToast } from 'vue-toast-notification';
+import { useRouter } from 'vue-router';
 
 
 const email = ref('');
 const password = ref(''); 
 const toast = useToast();
 const errors = ref({});
+const router = useRouter();
 
 const memberLogin = async () => {
   try{
@@ -41,7 +43,17 @@ const memberLogin = async () => {
     if(response.status){
       localStorage.setItem('apiToken', response.data.token);
       localStorage.setItem('user', JSON.stringify(response.data.data));
-      window.location.href = '/member-dashboard';
+      
+      toast.success('Login was successfull', {
+        position:'top-right',
+        duration:2000
+      })
+      setTimeout(()=>{
+        router.push('/member-dashboard').then(() => {
+          return window.location.reload();
+        })
+      }, 2000)
+      
     }
   }catch(error){
     toast.error('validation error', {

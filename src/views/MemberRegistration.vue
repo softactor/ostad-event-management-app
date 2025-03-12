@@ -81,7 +81,18 @@ const register = async () => {
       },
     });
 
-    toast.success('registration complete')
+    toast.success('registration has been completed', {
+      position:'top-right',
+      duration:2000
+    })
+
+
+    setTimeout(()=>{
+      router.push('/login').then(() => {
+        return window.location.reload();
+      })
+    }, 2000)
+
     
     // router.push('/login').then(() => {
     //     return window.location.reload();

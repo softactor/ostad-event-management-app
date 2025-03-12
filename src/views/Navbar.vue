@@ -21,7 +21,7 @@
                 </template>
                 
                 <template v-else>
-                    <router-link class="me-3 py-2 link-body-emphasis text-decoration-none" to="/login">Memberdashboard</router-link>
+                    <router-link class="me-3 py-2 link-body-emphasis text-decoration-none" to="/member-dashboard">Memberdashboard</router-link>
                     <button class="me-3 py-2 link-body-emphasis text-decoration-none btn btn-danger" @click="logout">Logout</button>
                 </template>
                 
@@ -29,7 +29,7 @@
         </div>
 
         <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
-            <h1 class="display-4 fw-normal text-body-emphasis">Pricing</h1>
+            <h1 class="display-4 fw-normal text-body-emphasis">Events</h1>
             <p class="fs-5 text-body-secondary">Quickly build an effective pricing table for your potential customers
                 with this Bootstrap example. It’s built with default Bootstrap components and utilities with little
                 customization.</p>

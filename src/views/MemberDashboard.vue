@@ -4,7 +4,7 @@
         <div class="row justify-content-center">
           <div class="col-md-12">
             <div class="card">
-              <div class="card-header">Registration Check test</div>
+              <div class="card-header">Member Dashboard</div>
               <div class="card-body">
                 
                     <div class="row">
@@ -12,8 +12,7 @@
                             link
                         </div>
                         <div class="col-md-8">
-
-                                <ul>
+                                <ul v-if="loggeduser">
                                     <li>Name: {{ loggeduser.name }}</li>
                                     <li>Email: {{ loggeduser.email }}</li>
                                     <li>Profile Image: 
@@ -39,11 +38,10 @@
         import { ref, onMounted } from 'vue';
 
         const loggeduser = ref(null)
-        const apiUrl = 'http://localhost:8095/storage/'
+        const apiUrl = 'http://localhost:8095/'
         onMounted(async () => {  
             const user = localStorage.getItem('user')
             loggeduser.value = JSON.parse(user)
-            console.log(loggeduser.value)
         });
 
     </script>

@@ -41,17 +41,28 @@ const memberLogin = async () => {
       password: password.value
     });
     if(response.status){
+
+      const userData = response.data.data
       localStorage.setItem('apiToken', response.data.token);
-      localStorage.setItem('user', JSON.stringify(response.data.data));
+      localStorage.setItem('user', JSON.stringify(userData));
       
       toast.success('Login was successfull', {
         position:'top-right',
         duration:2000
       })
       setTimeout(()=>{
-        router.push('/member-dashboard').then(() => {
-          return window.location.reload();
-        })
+
+        if(userData.role == 'user'){
+          router.push('/member-dashboard').then(() => {
+            return window.location.reload();
+          })
+        }else if(userData.role == 'admin'){
+          router.push('/admin/dashboard').then(() => {
+            return window.location.reload();
+          })
+        }
+
+        
       }, 2000)
       
     }

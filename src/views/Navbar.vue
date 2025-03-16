@@ -21,7 +21,12 @@
                 </template>
                 
                 <template v-else>
-                    <router-link class="me-3 py-2 link-body-emphasis text-decoration-none" to="/member-dashboard">Memberdashboard</router-link>
+                    <router-link v-if="userRole == 'admin'" 
+                    class="me-3 py-2 link-body-emphasis text-decoration-none" to="admin/dashboard">Admin dashboard</router-link>
+
+                    <router-link v-if="userRole == 'user'"
+                    class="me-3 py-2 link-body-emphasis text-decoration-none" to="/member-dashboard">Member dashboard</router-link>
+
                     <button class="me-3 py-2 link-body-emphasis text-decoration-none btn btn-danger" @click="logout">Logout</button>
                 </template>
                 
@@ -47,6 +52,11 @@ const router = useRouter();
 
 const userLoggedIn = computed(() => {
     return localStorage.getItem('apiToken') ? true : false;
+})   
+
+const userRole = computed(() => {
+    const userData = JSON.parse(localStorage.getItem('user'))
+    return userData.role == 'admin' ? 'admin' : 'user'
 })   
 
 const logout = () => {

@@ -65,8 +65,11 @@ const loggeduser = ref(null)
 const event = ref(null)
 const ticket_qty = ref(1)
 
+const router = useRouter()
 const route = useRoute()
 const apiUrl = 'http://localhost:8095/'
+
+const toast = useToast()
 
 onMounted(()=>{
 
@@ -95,9 +98,23 @@ const confirmbooking = ()=> {
     api.post(`member-event-booking`, {
         user_id: loggeduser.value.id,
         event_id: event.value.id,
-        ticket_qty: ticket_qty,
-        total_price: 11,
+        ticket_qty: ticket_qty.value,
+        ticket_price: event.value.ticket_price,
+        total_price: total_amount.value,
+    }).then((response)=>{
+        toast.success(response.data.message, {
+            position:'top-right'
+        })
+
+        setTimeout(()=>{
+            router.push('member-event-bookings')
+        }, 200)
+
     })
+
+    
+
+
 
 } 
 

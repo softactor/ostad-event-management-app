@@ -9,7 +9,9 @@
                 
                     <div class="row">
                         <div class="col-md-4">
-                            link
+                             <router-link to="/member-event-bookings">
+                                Bookings
+                             </router-link>
                         </div>
                         <div class="col-md-8">
                                 <ul v-if="loggeduser">

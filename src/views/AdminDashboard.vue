@@ -19,6 +19,10 @@
                                 <router-link to="/admin/events">Events
                                 </router-link>
                               </li>
+                              <li>
+                                <router-link to="/admin/bookings">Bookings
+                                </router-link>
+                              </li>
                             </ul>
 
                         </div>

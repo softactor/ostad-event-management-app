@@ -4,7 +4,7 @@
         <div class="row justify-content-center">
           <div class="col-md-12">
             <div class="card">
-              <div class="card-header">Member Dashboard</div>
+              <div class="card-header">Member Dashboard Updated</div>
               <div class="card-body">
                 
                     <div class="row">
@@ -38,12 +38,26 @@
     
     <script setup>
         import { ref, onMounted } from 'vue';
+        import { useToast } from 'vue-toast-notification';
 
         const loggeduser = ref(null)
+        const toast = useToast()
+
         const apiUrl = 'http://localhost:8095/'
         onMounted(async () => {  
             const user = localStorage.getItem('user')
             loggeduser.value = JSON.parse(user)
+
+            const channel = window.Echo.channel('booking-channel') 
+            channel.listen('.booking-updated', (data) => {
+              const message = data.bookingData.user.name + ' event '+  data.bookingData.event.title + ' booking '+  data.bookingData.status
+              toast.success(message, {
+                position:'top-right',
+                duration:2000
+              })
+            })
+
+
         });
 
     </script>

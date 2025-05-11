@@ -48,7 +48,10 @@
             const user = localStorage.getItem('user')
             loggeduser.value = JSON.parse(user)
 
-            const channel = window.Echo.channel('booking-channel') 
+            // const channel = window.Echo.channel('booking-channel') 
+
+            const channel = window.Echo.private(`booking-channel.${loggeduser.value.id}`);
+
             channel.listen('.booking-updated', (data) => {
               const message = data.bookingData.user.name + ' event '+  data.bookingData.event.title + ' booking '+  data.bookingData.status
               toast.success(message, {

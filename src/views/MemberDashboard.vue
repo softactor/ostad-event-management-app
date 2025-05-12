@@ -51,7 +51,7 @@
             // const channel = window.Echo.channel('booking-channel') 
 
             const channel = window.Echo.channel('booking-channel')
-
+            console.log(channel);
             channel.listen('.booking-updated', (data) => {
               console.log(data);
               const message = data.bookingData.user.name + ' event '+  data.bookingData.event.title + ' booking '+  data.bookingData.status

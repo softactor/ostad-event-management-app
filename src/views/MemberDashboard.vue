@@ -47,15 +47,9 @@
         onMounted(async () => {  
             const user = localStorage.getItem('user')
             loggeduser.value = JSON.parse(user)
-
-            console.log('onmounted');
-            console.log(loggeduser.value.id);
             // const channel = window.Echo.channel('booking-channel') 
             const channel = window.Echo.private(`booking-channel.${loggeduser.value.id}`);
-            console.log(channel);
             channel.listen('.booking-updated', (data) => {
-              console.log('after dataaa');
-              console.log(data);
               const message = data.bookingData.user.name + ' event '+  data.bookingData.event.title + ' booking '+  data.bookingData.status
               toast.success(message, {
                 position:'top-right',

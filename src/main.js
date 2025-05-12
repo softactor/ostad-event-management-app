@@ -30,7 +30,8 @@ window.Echo = new Echo({
     broadcaster: 'pusher',
     key: '78c747ca39c06d2788b5',
     cluster: "ap2",
-    forceTLS: true,
+    forceTLS: false,
+    disableStats: true,
     authEndpoint: 'https://apieventmanagement.codecraftstudios.org/broadcasting/auth',
     auth: {
         headers: {

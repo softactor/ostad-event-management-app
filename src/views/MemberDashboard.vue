@@ -53,6 +53,8 @@
             // const channel = window.Echo.channel('booking-channel') 
 
             const channel = window.Echo.private(`booking-channel.${loggeduser.value.id}`);
+            console.log(loggeduser.value.id)
+            console.log(channel)
 
             channel.listen('.booking-updated', (data) => {
               console.log(data);

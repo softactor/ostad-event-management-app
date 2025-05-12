@@ -48,13 +48,9 @@
             const user = localStorage.getItem('user')
             loggeduser.value = JSON.parse(user)
 
-            console.log(loggeduser.value.id)
-
             // const channel = window.Echo.channel('booking-channel') 
 
-            const channel = window.Echo.private(`booking-channel.${loggeduser.value.id}`);
-            console.log(loggeduser.value.id)
-            console.log(channel)
+            const channel = window.Echo.channel('booking-channel')
 
             channel.listen('.booking-updated', (data) => {
               console.log(data);

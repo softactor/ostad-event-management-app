@@ -52,7 +52,7 @@
 
             const channel = window.Echo.private(`booking-channel.${user.id}`);
             console.log(channel);
-            channel.bind('booking-updated', (data) => {
+            channel.listen('booking-updated', (data) => {
               console.log(data);
               const message = data.bookingData.user.name + ' event '+  data.bookingData.event.title + ' booking '+  data.bookingData.status
               toast.success(message, {

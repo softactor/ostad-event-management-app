@@ -50,7 +50,7 @@
 
             // const channel = window.Echo.channel('booking-channel') 
 
-            const channel = window.Echo.channel('booking-channel')
+            const channel = window.Echo.private(`booking-channel.${user.id}`);
             console.log(channel);
             channel.bind('booking-updated', (data) => {
               console.log(data);

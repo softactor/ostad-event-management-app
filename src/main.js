@@ -32,7 +32,7 @@ window.Echo = new Echo({
     cluster: "ap2",
     forceTLS: true,
     disableStats: true,
-    authEndpoint: 'https://apieventmanagement.codecraftstudios.org/broadcasting/auth',
+    authEndpoint: '/broadcasting/auth',
     auth: {
         headers: {
             'Authorization': `Bearer ${localStorage.getItem('apiToken')}`

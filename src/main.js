@@ -31,6 +31,12 @@ window.Echo = new Echo({
     key: '78c747ca39c06d2788b5',
     cluster: "ap2",
     forceTLS: true,
+    authEndpoint: '/broadcasting/auth',
+    auth: {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('apiToken')}`
+        }
+    }
 })
 
 
